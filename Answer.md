@@ -32,4 +32,10 @@
 
 - When there is a change in any of the files in repo, we notify that we want to commit those changes to git and with add command we choose which of those changes we want to commit
 
+<br/>
+
+###  What does the git pull command do?
+
+- When there is a change on the online repo of github it is not synchronized with local repo and the pull command gets the version of the online repo from github.
+
 

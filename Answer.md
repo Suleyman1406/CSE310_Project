@@ -26,3 +26,10 @@
     # Built Visual Studio Code Extensions
     *.vsix
 ```
+<br/>
+
+###  What does the git add command do?
+
+- When there is a change in any of the files in repo, we notify that we want to commit those changes to git and with add command we choose which of those changes we want to commit
+
+

@@ -39,3 +39,5 @@
 - When there is a change on the online repo of github it is not synchronized with local repo and the pull command gets the version of the online repo from github.
 
 
+### What does the git clone command do
+-"git clone" command, simply; it allows us to copy any project from the remote repository to our

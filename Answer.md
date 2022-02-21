@@ -26,18 +26,23 @@
     # Built Visual Studio Code Extensions
     *.vsix
 ```
+
 <br/>
 
-###  What does the git add command do?
+### What does the git add command do?
 
 - When there is a change in any of the files in repo, we notify that we want to commit those changes to git and with add command we choose which of those changes we want to commit
 
 <br/>
 
-###  What does the git pull command do?
+### What does the git pull command do?
 
 - When there is a change on the online repo of github it is not synchronized with local repo and the pull command gets the version of the online repo from github.
 
-
 ### What does the git clone command do
+
 -"git clone" command, simply; it allows us to copy any project from the remote repository to our
+
+---
+
+# -All the questions have been answered by 12:19.

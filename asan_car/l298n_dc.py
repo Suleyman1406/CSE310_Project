@@ -53,6 +53,8 @@ while(1):
         else:
          GPIO.output(in1,GPIO.LOW)
          GPIO.output(in2,GPIO.HIGH)
+         GPIO.output(in3,GPIO.LOW)
+         GPIO.output(in4,GPIO.HIGH)
          print("backward")
          x='z'
 
@@ -85,16 +87,19 @@ while(1):
     elif x=='l':
         print("low")
         p1.ChangeDutyCycle(25)
+        p2.ChangeDutyCycle(25)
         x='z'
 
     elif x=='m':
         print("medium")
         p1.ChangeDutyCycle(50)
+        p2.ChangeDutyCycle(50)
         x='z'
 
     elif x=='h':
         print("high")
         p1.ChangeDutyCycle(75)
+        p2.ChangeDutyCycle(75)
         x='z'
      
     

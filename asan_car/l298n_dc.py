@@ -41,8 +41,8 @@ while(1):
 
     x=input()
     
-    if x=='r':
-        print("run")
+    if x=='run':
+        print("asancar is running")
         if(temp1==1):
          GPIO.output(in1,GPIO.HIGH)
          GPIO.output(in2,GPIO.LOW)
@@ -58,16 +58,16 @@ while(1):
          print("backward")
          x='z'
 
-    elif x=='s':
-        print("stop")
+    elif x=='stop':
+        print("asancar has stopped")
         GPIO.output(in1,GPIO.LOW)
         GPIO.output(in2,GPIO.LOW)
         GPIO.output(in3,GPIO.LOW)
         GPIO.output(in4,GPIO.LOW)
         x='z'
 
-    elif x=='f':
-        print("forward")
+    elif x=='w':
+        print("asancar is going forward")
         GPIO.output(in1,GPIO.HIGH)
         GPIO.output(in2,GPIO.LOW)
         GPIO.output(in3,GPIO.HIGH)
@@ -75,8 +75,8 @@ while(1):
         temp1=1
         x='z'
 
-    elif x=='b':
-        print("backward")
+    elif x=='s':
+        print("asan car is going backward")
         GPIO.output(in1,GPIO.LOW)
         GPIO.output(in2,GPIO.HIGH)
         GPIO.output(in3,GPIO.LOW)
@@ -85,25 +85,26 @@ while(1):
         x='z'
 
     elif x=='l':
-        print("low")
+        print("asancar's speed is low")
         p1.ChangeDutyCycle(25)
         p2.ChangeDutyCycle(25)
         x='z'
 
     elif x=='m':
-        print("medium")
+        print("asancar's speed is medium")
         p1.ChangeDutyCycle(50)
         p2.ChangeDutyCycle(50)
         x='z'
 
     elif x=='h':
-        print("high")
+        print("asancar's speed is high")
         p1.ChangeDutyCycle(75)
         p2.ChangeDutyCycle(75)
         x='z'
      
     
-    elif x=='e':
+    elif x=='exit':
+        print("asancar is closed")
         GPIO.cleanup()
         print("GPIO Clean up")
         break

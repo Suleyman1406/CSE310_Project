@@ -34,7 +34,7 @@ p1.start(25)
 p2.start(25)
 print("\n")
 # print("The default speed & direction of motor is LOW & Forward.....")
-print("r-run s-stop f-forward b-backward l-low m-medium h-high e-exit")
+print("INSTRUCTIONS\n\nstop-to stop\nw-forward\na-left\ns-backward\nd-right\n\nTo Change the Speed\nl-low\nm-medium\nh-high\n\nexit-to exit")
 print("\n")    
 
 while(1):
@@ -58,7 +58,7 @@ while(1):
          print("backward")
          x='z'
 
-    elif x=='stop':
+    if x=='stop':
         print("asancar has stopped")
         GPIO.output(in1,GPIO.LOW)
         GPIO.output(in2,GPIO.LOW)
@@ -75,6 +75,14 @@ while(1):
         temp1=1
         x='z'
 
+    elif x=='a':
+        print("asancar is going left")
+        GPIO.output(in1,GPIO.HIGH)
+        GPIO.output(in2,GPIO.LOW)
+        GPIO.output(in3,GPIO.LOW)
+        GPIO.output(in4,GPIO.LOW)
+        x='z'
+
     elif x=='s':
         print("asan car is going backward")
         GPIO.output(in1,GPIO.LOW)
@@ -82,6 +90,14 @@ while(1):
         GPIO.output(in3,GPIO.LOW)
         GPIO.output(in4,GPIO.HIGH)
         temp1=0
+        x='z'
+
+    elif x=='d':
+        print("asancar is going right")
+        GPIO.output(in1,GPIO.LOW)
+        GPIO.output(in2,GPIO.LOW)
+        GPIO.output(in3,GPIO.HIGH)
+        GPIO.output(in4,GPIO.LOW)
         x='z'
 
     elif x=='l':

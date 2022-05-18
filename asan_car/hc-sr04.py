@@ -4,8 +4,8 @@ import time
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-R_TRIG = 23
-R_ECHO = 24
+R_TRIG = 8
+R_ECHO = 7
 
 L_TRIG = 26
 L_ECHO = 19

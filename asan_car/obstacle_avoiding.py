@@ -133,6 +133,8 @@ going_forward = False
 
 while True:
     left_distance = calculate_left_distance
+    print(type(left_distance))
+    print("value - ",left_distance)
     if left_distance < 15:
         stop()
         time.sleep(0.5)

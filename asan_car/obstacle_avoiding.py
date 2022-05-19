@@ -133,6 +133,7 @@ danger_in_right = False
 going_forward = False
 
 while True:
+
     if calculate_left_distance() < 25:
         back()
         time.sleep(0.5)
@@ -147,5 +148,4 @@ while True:
         going_forward=False
     if going_forward is False:
         forward()
-        time.sleep(0.5)
 

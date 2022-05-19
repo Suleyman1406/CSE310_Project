@@ -70,8 +70,8 @@ while(1):
         print("asancar is going forward")
         GPIO.output(in1,GPIO.LOW)
         GPIO.output(in2,GPIO.HIGH)
-        GPIO.output(in3,GPIO.LOW)
         GPIO.output(in4,GPIO.HIGH)
+        GPIO.output(in3,GPIO.LOW)
         temp1=1
         x='z'
 

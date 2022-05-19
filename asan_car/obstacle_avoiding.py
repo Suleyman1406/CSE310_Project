@@ -72,8 +72,7 @@ GPIO.setup(L_ECHO,GPIO.IN)                   # initialize GPIO Pin as input
 
 def calculate_right_distance():
     GPIO.output(R_TRIG, False)
-    print("Olculuyor...")
-    time.sleep(0.5)
+    time.sleep(0.1)
 
     GPIO.output(R_TRIG, True)
     time.sleep(0.00001)
@@ -98,8 +97,7 @@ def calculate_right_distance():
                   
 def calculate_left_distance():
     GPIO.output(L_TRIG, False)
-    print("Olculuyor...")
-    time.sleep(0.5)
+    time.sleep(0.1)
 
     GPIO.output(L_TRIG, True)
     time.sleep(0.00001)
@@ -140,7 +138,7 @@ while True:
         back()
         time.sleep(1.5)
         right()
-        time.sleep(0.3)
+        time.sleep(1)
         going_forward=False
     if calculate_right_distance() < 25:
         stop()
@@ -148,7 +146,7 @@ while True:
         back()
         time.sleep(1.5)
         left()
-        time.sleep(0.3)
+        time.sleep(1)
         going_forward=False
     if going_forward is False:
         forward()

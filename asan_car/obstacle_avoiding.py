@@ -132,17 +132,13 @@ danger_in_right = False
 going_forward = False
 
 while True:
-    left_distance = calculate_left_distance
-    print(type(left_distance))
-    print("value - ",left_distance)
-    if left_distance < 15:
+    if calculate_left_distance() < 15:
         stop()
         time.sleep(0.5)
         right()
         time.sleep(0.5)
         going_forward=False
-    right_distance = calculate_right_distance
-    if right_distance < 15:
+    if calculate_right_distance() < 15:
         stop()
         time.sleep(0.5)
         left()
@@ -151,3 +147,4 @@ while True:
     if going_forward is False:
         forward()
         time.sleep(0.5)
+

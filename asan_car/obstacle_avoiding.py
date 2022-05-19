@@ -135,14 +135,18 @@ going_forward = False
 while True:
 
     if calculate_left_distance() < 25:
+        stop()
+        time.sleep(1)
         back()
-        time.sleep(0.5)
+        time.sleep(1.5)
         right()
         time.sleep(0.3)
         going_forward=False
     if calculate_right_distance() < 25:
+        stop()
+        time.sleep(1)
         back()
-        time.sleep(0.5)
+        time.sleep(1.5)
         left()
         time.sleep(0.3)
         going_forward=False

@@ -78,9 +78,9 @@ while(1):
     elif x=='a':
         print("asancar is going left")
         GPIO.output(in1,GPIO.LOW)
-        GPIO.output(in2,GPIO.HIGH)
+        GPIO.output(in2,GPIO.LOW)
         GPIO.output(in3,GPIO.LOW)
-        GPIO.output(in4,GPIO.LOW)
+        GPIO.output(in4,GPIO.HIGH)
         x='z'
 
     elif x=='s':
@@ -95,11 +95,11 @@ while(1):
 
     elif x=='d':
         print("asancar is going right")
-        
         GPIO.output(in1,GPIO.LOW)
-        GPIO.output(in2,GPIO.LOW)
+        GPIO.output(in2,GPIO.HIGH)
         GPIO.output(in3,GPIO.LOW)
-        GPIO.output(in4,GPIO.HIGH)
+        GPIO.output(in4,GPIO.LOW)
+        
         x='z'
 
     elif x=='l':

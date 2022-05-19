@@ -11,10 +11,48 @@ TRIG1 = 26
 ECHO1 = 19
 led = 22
 
-m11=24
-m12=23
-m21=22
-m22=27
+in1=24
+in2=23
+in3=22
+in4=27
+
+ena = 25
+enb = 17
+
+def stop():
+    print("stop")
+    GPIO.output(in1,GPIO.LOW)
+    GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in3,GPIO.LOW)
+    GPIO.output(in4,GPIO.LOW)
+
+def forward():
+    GPIO.output(in1,GPIO.LOW)
+    GPIO.output(in2,GPIO.HIGH)
+    GPIO.output(in3,GPIO.LOW)
+    GPIO.output(in4,GPIO.HIGH)
+    print("Forward")
+
+def back():
+    GPIO.output(in1,GPIO.HIGH)
+    GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in3,GPIO.HIGH)
+    GPIO.output(in4,GPIO.LOW)
+    print("back")
+
+def left():
+    GPIO.output(in1,GPIO.LOW)
+    GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in3,GPIO.HIGH)
+    GPIO.output(in4,GPIO.LOW)
+    print("left")
+
+def right():
+    GPIO.output(in1,GPIO.HIGH)
+    GPIO.output(in2,GPIO.LOW)
+    GPIO.output(in3,GPIO.LOW)
+    GPIO.output(in4,GPIO.LOW)
+    print("right")
 
 GPIO.setup(TRIG,GPIO.OUT)                  # initialize GPIO Pin as outputs
 GPIO.setup(ECHO,GPIO.IN)                   # initialize GPIO Pin as input
@@ -23,51 +61,22 @@ GPIO.setup(ECHO1,GPIO.IN)                   # initialize GPIO Pin as input
 
 GPIO.setup(led,GPIO.OUT)                  
 
-GPIO.setup(m11,GPIO.OUT)
-GPIO.setup(m12,GPIO.OUT)
-GPIO.setup(m21,GPIO.OUT)
-GPIO.setup(m22,GPIO.OUT)
+GPIO.setup(in1,GPIO.OUT)
+GPIO.setup(in2,GPIO.OUT)
+GPIO.setup(ena,GPIO.OUT)
+p1=GPIO.PWM(ena,1000)
 
-GPIO.output(led, 1)
+GPIO.setup(in3,GPIO.OUT)
+GPIO.setup(in4,GPIO.OUT)
+GPIO.setup(enb,GPIO.OUT)
+p2=GPIO.PWM(enb,1000)
 
-time.sleep(5)
-
-def stop():
-    print("stop")
-    GPIO.output(m11, 0)
-    GPIO.output(m12, 0)
-    GPIO.output(m21, 0)
-    GPIO.output(m22, 0)
-
-def forward():
-    GPIO.output(m11, 1)
-    GPIO.output(m12, 0)
-    GPIO.output(m21, 1)
-    GPIO.output(m22, 0)
-    print("Forward")
-
-def back():
-    GPIO.output(m11, 0)
-    GPIO.output(m12, 1)
-    GPIO.output(m21, 0)
-    GPIO.output(m22, 1)
-    print("back")
-
-def left():
-    GPIO.output(m11, 0)
-    GPIO.output(m12, 0)
-    GPIO.output(m21, 1)
-    GPIO.output(m22, 0)
-    print("left")
-
-def right():
-    GPIO.output(m11, 1)
-    GPIO.output(m12, 0)
-    GPIO.output(m21, 0)
-    GPIO.output(m22, 0)
-    print("right")
+p1.start(50)
+p2.start(50)
 
 stop()
+time.sleep(2)
+
 count=0
 while True:
  i=0

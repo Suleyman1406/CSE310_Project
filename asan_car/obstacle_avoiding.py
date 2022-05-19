@@ -1,4 +1,5 @@
 from enum import Flag
+from turtle import backward
 import RPi.GPIO as GPIO                    #Import GPIO library
 import time
 
@@ -132,13 +133,17 @@ danger_in_right = False
 going_forward = False
 
 while True:
-    if calculate_left_distance() < 15:
+    if calculate_left_distance() < 25:
+        back()
+        time.sleep(0.5)
         right()
-        time.sleep(0.5)
+        time.sleep(0.3)
         going_forward=False
-    if calculate_right_distance() < 15:
-        left()
+    if calculate_right_distance() < 25:
+        back()
         time.sleep(0.5)
+        left()
+        time.sleep(0.3)
         going_forward=False
     if going_forward is False:
         forward()

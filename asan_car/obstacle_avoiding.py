@@ -1,15 +1,10 @@
+from enum import Flag
 import RPi.GPIO as GPIO                    #Import GPIO library
 import time
 
 #Import time library
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)                    # programming the GPIO by BCM pin numbers
-
-TRIG = 8
-ECHO = 7
-TRIG1 = 26
-ECHO1 = 19
-led = 22
 
 in1=24
 in2=23
@@ -18,6 +13,16 @@ in4=27
 
 ena = 25
 enb = 17
+
+GPIO.setup(in1,GPIO.OUT)
+GPIO.setup(in2,GPIO.OUT)
+GPIO.setup(ena,GPIO.OUT)
+p1=GPIO.PWM(ena,1000)
+
+GPIO.setup(in3,GPIO.OUT)
+GPIO.setup(in4,GPIO.OUT)
+GPIO.setup(enb,GPIO.OUT)
+p2=GPIO.PWM(enb,1000)
 
 def stop():
     print("stop")
@@ -54,73 +59,91 @@ def right():
     GPIO.output(in4,GPIO.LOW)
     print("right")
 
-GPIO.setup(TRIG,GPIO.OUT)                  # initialize GPIO Pin as outputs
-GPIO.setup(ECHO,GPIO.IN)                   # initialize GPIO Pin as input
-GPIO.setup(TRIG1,GPIO.OUT)                  # initialize GPIO Pin as outputs
-GPIO.setup(ECHO1,GPIO.IN)                   # initialize GPIO Pin as input
+R_TRIG = 8
+R_ECHO = 7
+L_TRIG = 26
+L_ECHO = 19
 
-GPIO.setup(led,GPIO.OUT)                  
+GPIO.setup(R_TRIG,GPIO.OUT)                  # initialize GPIO Pin as outputs
+GPIO.setup(R_ECHO,GPIO.IN)                   # initialize GPIO Pin as input
+GPIO.setup(L_TRIG,GPIO.OUT)                  # initialize GPIO Pin as outputs
+GPIO.setup(L_ECHO,GPIO.IN)                   # initialize GPIO Pin as input
 
-GPIO.setup(in1,GPIO.OUT)
-GPIO.setup(in2,GPIO.OUT)
-GPIO.setup(ena,GPIO.OUT)
-p1=GPIO.PWM(ena,1000)
+def calculate_right_distance():
+    GPIO.output(R_TRIG, False)
+    print("Olculuyor...")
+    time.sleep(1)
 
-GPIO.setup(in3,GPIO.OUT)
-GPIO.setup(in4,GPIO.OUT)
-GPIO.setup(enb,GPIO.OUT)
-p2=GPIO.PWM(enb,1000)
+    GPIO.output(R_TRIG, True)
+    time.sleep(0.00001)
+    GPIO.output(R_TRIG, False)
 
-p1.start(50)
-p2.start(50)
+    while GPIO.input(R_ECHO)==0:
+        right_pulse_start = time.time()
+
+    while GPIO.input(R_ECHO)==1:
+        right_pulse_end = time.time()
+
+    right_pulse_duration = right_pulse_end - right_pulse_start
+    
+    right_distance = right_pulse_duration * 17150
+    right_distance = round(right_distance, 2)
+    
+    if right_distance > 2 and right_distance < 400:
+        print("RIGHT -- Mesafe:",right_distance - 0.5,"cm")
+    else:
+        print("RIGHT -- Menzil asildi")
+    return right_distance - 0.5
+                  
+def calculate_left_distance():
+    GPIO.output(L_TRIG, False)
+    print("Olculuyor...")
+    time.sleep(1)
+
+    GPIO.output(L_TRIG, True)
+    time.sleep(0.00001)
+    GPIO.output(L_TRIG, False)
+
+    while GPIO.input(L_ECHO)==0:
+        left_pulse_start = time.time()
+
+    while GPIO.input(L_ECHO)==1:
+        left_pulse_end = time.time()
+
+    left_pulse_duration = left_pulse_end - left_pulse_start
+    
+    left_distance = left_pulse_duration * 17150
+    left_distance = round(left_distance, 2)
+
+    if left_distance > 2 and left_distance < 400:
+        print("LEFT -- Mesafe:",left_distance - 0.5,"cm")
+    else:
+        print("LEFT -- Menzil asildi")
+    return left_distance - 0.5
+
+p1.start(75)
+p2.start(75)
 
 stop()
 time.sleep(2)
 
-count=0
+danger_in_left = False
+danger_in_right = False
+going_forward = False
+
 while True:
- i=0
- avgDistance=0
- for i in range(5):
-  GPIO.output(TRIG, False)                 #Set TRIG as LOW
-  time.sleep(0.1)                                   #Delay
-
-  GPIO.output(TRIG, True)                  #Set TRIG as HIGH
-  time.sleep(0.00001)                           #Delay of 0.00001 seconds
-  GPIO.output(TRIG, False)                 #Set TRIG as LOW
-
-  while GPIO.input(ECHO)==0:              #Check whether the ECHO is LOW
-       GPIO.output(led, False)             
-  pulse_start = time.time()
-
-  while GPIO.input(ECHO)==1:              #Check whether the ECHO is HIGH
-       GPIO.output(led, False) 
-  pulse_end = time.time()
-  pulse_duration = pulse_end - pulse_start #time to get back the pulse to sensor
-
-  distance = pulse_duration * 17150        #Multiply pulse duration by 17150 (34300/2) to get distance
-  distance = round(distance,2)                 #Round to two decimal points
-  avgDistance=avgDistance+distance
-
- avgDistance=avgDistance/5
- print(avgDistance)
- flag=0
- if avgDistance < 15:      #Check whether the distance is within 15 cm range
-    count=count+1
-    stop()
-    time.sleep(1)
-    back()
-    time.sleep(1.5)
-    if (count%3 ==1) & (flag==0):
-     right()
-     flag=1
-    else:
-     left()
-     flag=0
-    time.sleep(1.5)
-    stop()
-    time.sleep(1)
- else:
-    forward()
-    flag=0
- 
+    if calculate_left_distance < 15:
+        stop()
+        time.sleep(0.5)
+        right()
+        time.sleep(0.5)
+        going_forward=False
+    if calculate_right_distance < 15:
+        stop()
+        time.sleep(0.5)
+        left()
+        time.sleep(0.5)
+        going_forward=False
+    if going_forward is False:
+        forward()
+        time.sleep(0.5)

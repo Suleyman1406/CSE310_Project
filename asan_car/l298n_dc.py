@@ -20,54 +20,66 @@ GPIO.setup(m2_b,GPIO.OUT)
 GPIO.output(m2_b,GPIO.LOW)
 GPIO.output(m2_a,GPIO.LOW)
 
+def stop():
+    print("stop")
+    GPIO.output(m1_a,GPIO.LOW)
+    GPIO.output(m1_b,GPIO.LOW)
+    GPIO.output(m2_a,GPIO.LOW)
+    GPIO.output(m2_b,GPIO.LOW)
 
-# print("The default speed & direction of motor is LOW & Forward.....")
-print("INSTRUCTIONS\n\nst-to stop\nw-forward\na-left\ns-backward\nd-right\n\ne - to exit")
-print("\n")    
+def forward():
+    GPIO.output(m1_a,GPIO.LOW)
+    GPIO.output(m1_b,GPIO.HIGH)
+    GPIO.output(m2_a,GPIO.LOW)
+    GPIO.output(m2_b,GPIO.HIGH)
+    print("Forward")
+
+def backward():
+    GPIO.output(m1_a,GPIO.HIGH)
+    GPIO.output(m1_b,GPIO.LOW)
+    GPIO.output(m2_a,GPIO.HIGH)
+    GPIO.output(m2_b,GPIO.LOW)
+    print("back")
+
+def left():
+    GPIO.output(m1_a,GPIO.LOW)
+    GPIO.output(m1_b,GPIO.HIGH)
+    GPIO.output(m2_a,GPIO.HIGH)
+    GPIO.output(m2_b,GPIO.LOW)
+    print("left")
+
+def right():
+    GPIO.output(m1_a,GPIO.HIGH)
+    GPIO.output(m1_b,GPIO.LOW)
+    GPIO.output(m2_a,GPIO.LOW)
+    GPIO.output(m2_b,GPIO.HIGH)
+    print("right")
+
+print("INSTRUCTIONS\n\nst-to stop\nw-forward\na-left\ns-backward\nd-right\n\ne - to exit\n")
 
 while(True):
     x=input()
 
     if x=='st':
-        print("asancar has stopped")
-        GPIO.output(m1_a,GPIO.LOW)
-        GPIO.output(m1_b,GPIO.LOW)
-        GPIO.output(m2_a,GPIO.LOW)
-        GPIO.output(m2_b,GPIO.LOW)
+        stop()
         x='z'
 
     elif x=='w':
-        print("asancar is going forward")
-        GPIO.output(m1_a,GPIO.LOW)
-        GPIO.output(m1_b,GPIO.HIGH)
-        GPIO.output(m2_a,GPIO.LOW)
-        GPIO.output(m2_b,GPIO.HIGH)
+        forward()
         temp1=1
         x='z'
 
     elif x=='a':
-        print("asancar is going left")
-        GPIO.output(m1_a,GPIO.LOW)
-        GPIO.output(m1_b,GPIO.HIGH)
-        GPIO.output(m2_a,GPIO.HIGH)
-        GPIO.output(m2_b,GPIO.LOW)
+        left()
         x='z'
 
     elif x=='s':
-        print("asan car is going backward")
-        GPIO.output(m1_a,GPIO.HIGH)
-        GPIO.output(m1_b,GPIO.LOW)
-        GPIO.output(m2_a,GPIO.HIGH)
-        GPIO.output(m2_b,GPIO.LOW)
+        backward()
         temp1=0
         x='z'
 
     elif x=='d':
-        print("asancar is going right")
-        GPIO.output(m1_a,GPIO.HIGH)
-        GPIO.output(m1_b,GPIO.LOW)
-        GPIO.output(m2_a,GPIO.LOW)
-        GPIO.output(m2_b,GPIO.HIGH)
+        right()
         x='z'
      
     elif x=='e':

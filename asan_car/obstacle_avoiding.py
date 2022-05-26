@@ -19,7 +19,7 @@ def main():
             distance = calculate_left_distance()
             obstacle = 'on left'
         already_measured_left = not already_measured_left
-        
+        print("distance "+obstacle+" is "+distance)
         if distance < 25:
             stop()
             time.sleep(1)

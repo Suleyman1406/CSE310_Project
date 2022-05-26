@@ -25,7 +25,6 @@ def obstacle_avoidence():
         already_measured_left = not already_measured_left
         print("distance "+obstacle+" is "+str(distance))
         if distance < 25:
-            number_of_lives = number_of_lives - 1
             stop()
             time.sleep(1)
             backward()

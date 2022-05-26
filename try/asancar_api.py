@@ -4,8 +4,11 @@ import time
 from l9119_engine import forward, backward, left, stop, right
 from hcsr04 import calculate_right_distance, calculate_left_distance
 from obstacle_avoiding import obstacle_avoidence
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
     
@@ -15,8 +18,6 @@ def index():
     
 @app.route("/<deviceName>/<action>", methods=['GET'])
 def action(deviceName, action):
-    response = flask.jsonify({'some': 'data'})
-    response.headers.add('Access-Control-Allow-Origin', '*')
     if deviceName == 'manual':
         if action == 'forward':
                     forward()

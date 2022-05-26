@@ -12,11 +12,11 @@ GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(m1_a,GPIO.OUT)
 GPIO.setup(m1_b,GPIO.OUT)
-GPIO.output(m1_a,GPIO.LOW)
-GPIO.output(m1_b,GPIO.LOW)
-
 GPIO.setup(m2_a,GPIO.OUT)
 GPIO.setup(m2_b,GPIO.OUT)
+
+GPIO.output(m1_a,GPIO.LOW)
+GPIO.output(m1_b,GPIO.LOW)
 GPIO.output(m2_b,GPIO.LOW)
 GPIO.output(m2_a,GPIO.LOW)
 
@@ -55,39 +55,43 @@ def right():
     GPIO.output(m2_b,GPIO.HIGH)
     print("right")
 
-print("INSTRUCTIONS\n\nst-to stop\nw-forward\na-left\ns-backward\nd-right\n\ne - to exit\n")
+def main():
+    print("INSTRUCTIONS\n\nst-to stop\nw-forward\na-left\ns-backward\nd-right\n\ne - to exit\n")
 
-while(True):
-    x=input()
+    while(True):
+        x=input()
 
-    if x=='st':
-        stop()
-        x='z'
+        if x=='st':
+            stop()
+            x='z'
 
-    elif x=='w':
-        forward()
-        temp1=1
-        x='z'
+        elif x=='w':
+            forward()
+            temp1=1
+            x='z'
 
-    elif x=='a':
-        left()
-        x='z'
+        elif x=='a':
+            left()
+            x='z'
 
-    elif x=='s':
-        backward()
-        temp1=0
-        x='z'
+        elif x=='s':
+            backward()
+            temp1=0
+            x='z'
 
-    elif x=='d':
-        right()
-        x='z'
-     
-    elif x=='e':
-        print("asancar is closed")
-        GPIO.cleanup()
-        print("GPIO Clean up")
-        break
-    
-    else:
-        print("<<<  wrong data  >>>")
-        print("please enter the defined data to continue.....")
+        elif x=='d':
+            right()
+            x='z'
+        
+        elif x=='e':
+            print("asancar is closed")
+            GPIO.cleanup()
+            print("GPIO Clean up")
+            break
+        
+        else:
+            print("<<<  wrong data  >>>")
+            print("please enter the defined data to continue.....")
+
+if __name__ == "__main__":
+    main()

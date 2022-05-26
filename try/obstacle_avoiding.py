@@ -13,7 +13,7 @@ def obstacle_avoidence():
     while True:
         myFile = open("myFile1.txt", "r")
         print(myFile.read())
-        if myFile.read() == 'false':
+        if myFile.read() == 'false ':
             break
         myFile.close()
         if already_measured_left:

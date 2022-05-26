@@ -2,7 +2,7 @@ from enum import Flag
 from turtle import backward
 import RPi.GPIO as GPIO                    #Import GPIO library
 import time
-
+from l298n_dc import forward, backward, left, stop, right
 #Import time library
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)                    # programming the GPIO by BCM pin numbers
@@ -24,41 +24,6 @@ GPIO.setup(in3,GPIO.OUT)
 GPIO.setup(in4,GPIO.OUT)
 GPIO.setup(enb,GPIO.OUT)
 p2=GPIO.PWM(enb,1000)
-
-def stop():
-    print("stop")
-    GPIO.output(in1,GPIO.LOW)
-    GPIO.output(in2,GPIO.LOW)
-    GPIO.output(in3,GPIO.LOW)
-    GPIO.output(in4,GPIO.LOW)
-
-def forward():
-    GPIO.output(in1,GPIO.LOW)
-    GPIO.output(in2,GPIO.HIGH)
-    GPIO.output(in3,GPIO.LOW)
-    GPIO.output(in4,GPIO.HIGH)
-    print("Forward")
-
-def back():
-    GPIO.output(in1,GPIO.HIGH)
-    GPIO.output(in2,GPIO.LOW)
-    GPIO.output(in3,GPIO.HIGH)
-    GPIO.output(in4,GPIO.LOW)
-    print("back")
-
-def left():
-    GPIO.output(in1,GPIO.LOW)
-    GPIO.output(in2,GPIO.LOW)
-    GPIO.output(in3,GPIO.HIGH)
-    GPIO.output(in4,GPIO.LOW)
-    print("left")
-
-def right():
-    GPIO.output(in1,GPIO.HIGH)
-    GPIO.output(in2,GPIO.LOW)
-    GPIO.output(in3,GPIO.LOW)
-    GPIO.output(in4,GPIO.LOW)
-    print("right")
 
 R_TRIG = 8
 R_ECHO = 7
@@ -135,7 +100,7 @@ while True:
     if calculate_left_distance() < 25:
         stop()
         time.sleep(1)
-        back()
+        backward()
         time.sleep(1.5)
         right()
         time.sleep(1)
@@ -143,7 +108,7 @@ while True:
     if calculate_right_distance() < 25:
         stop()
         time.sleep(1)
-        back()
+        backward()
         time.sleep(1.5)
         left()
         time.sleep(1)

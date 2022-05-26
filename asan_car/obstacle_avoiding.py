@@ -25,7 +25,7 @@ def main():
             time.sleep(1)
             backward()
             time.sleep(1.5)
-            if obstacle is 'on right':
+            if obstacle == 'on right':
                 left()
             else:
                 right()

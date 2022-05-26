@@ -7,24 +7,6 @@ from l298n_dc import forward, backward, left, stop, right
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)                    # programming the GPIO by BCM pin numbers
 
-in1=24
-in2=23
-in3=22
-in4=27
-
-ena = 25
-enb = 17
-
-GPIO.setup(in1,GPIO.OUT)
-GPIO.setup(in2,GPIO.OUT)
-GPIO.setup(ena,GPIO.OUT)
-p1=GPIO.PWM(ena,1000)
-
-GPIO.setup(in3,GPIO.OUT)
-GPIO.setup(in4,GPIO.OUT)
-GPIO.setup(enb,GPIO.OUT)
-p2=GPIO.PWM(enb,1000)
-
 R_TRIG = 8
 R_ECHO = 7
 L_TRIG = 26
@@ -85,14 +67,9 @@ def calculate_left_distance():
         print("LEFT -- Menzil asildi")
     return left_distance - 0.5
 
-p1.start(75)
-p2.start(75)
-
 stop()
 time.sleep(2)
 
-danger_in_left = False
-danger_in_right = False
 going_forward = False
 
 while True:

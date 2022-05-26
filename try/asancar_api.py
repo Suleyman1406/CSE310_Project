@@ -21,8 +21,11 @@ def action(deviceName, action):
     if deviceName == 'manual':
         if action == 'forward':
                     forward()
-                    with open('auto.txt',x) as f:
-                        f.write(action)
+                    myFile = open("myFile1.txt", "w")
+                    myFile.write("This is my file having some new content!.We have deleted the previous one ")
+                    myFile.close()
+                    myFile = open("myFile1.txt", "r")
+                    print(myFile.read())
         elif action == 'backward':
                     backward()
         elif action == 'right':
@@ -37,6 +40,6 @@ def action(deviceName, action):
             f.write(action)
     else:
         return 'is Confused'
-    return response
+    return 'everything is AWESOME!'
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=80, debug=True)

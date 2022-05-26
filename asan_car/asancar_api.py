@@ -27,7 +27,7 @@ def action(deviceName, action):
         elif action == 'stop':
                     stop()
     elif deviceName == 'auto':
-        main()
+        main(int(action))
     else:
         actuator = 'is confused'
     return actuator

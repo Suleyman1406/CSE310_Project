@@ -6,12 +6,11 @@ from hcsr04 import calculate_right_distance, calculate_left_distance
 GPIO.setmode(GPIO.BCM)                   
 GPIO.setwarnings(False)
 
-def main():
+def obstacle_avoidence(number_of_lives):
     going_forward = False
     already_measured_left = False
 
-    while True:
-
+    for x in range(number_of_lives):
         if already_measured_left:
             distance = calculate_right_distance()
             obstacle = 'on right'
@@ -36,5 +35,6 @@ def main():
             going_forward = True
 
 if __name__ == "__main__":
-    main()
+    while True:
+        obstacle_avoidence(1)
 

@@ -21,11 +21,6 @@ def action(deviceName, action):
     if deviceName == 'manual':
         if action == 'forward':
                     forward()
-                    myFile = open("myFile1.txt", "w")
-                    myFile.write("This is my file having some new content!.We have deleted the previous one ")
-                    myFile.close()
-                    myFile = open("myFile1.txt", "r")
-                    print(myFile.read())
         elif action == 'backward':
                     backward()
         elif action == 'right':
@@ -35,9 +30,10 @@ def action(deviceName, action):
         elif action == 'stop':
                     stop()
     elif deviceName == 'auto':
-        obstacle_avoidence(int(action))
-        with open('auto.txt',x) as f:
-            f.write(action)
+        myFile = open("myFile1.txt", "w")
+        myFile.write(action)
+        myFile.close()
+        obstacle_avoidence()
     else:
         return 'is Confused'
     return 'everything is AWESOME!'

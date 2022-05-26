@@ -40,6 +40,5 @@ def obstacle_avoidence():
             going_forward = True
 
 if __name__ == "__main__":
-    while True:
-        obstacle_avoidence(1)
+    obstacle_avoidence()
 

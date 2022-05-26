@@ -16,6 +16,6 @@ def action(deviceName, action):
 		actuator = 'Obstacle avoiding'
 	else:
 		actuator = 'is confused'
-	return render_template('index.html', actuator)
+	return actuator
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=80, debug=True)

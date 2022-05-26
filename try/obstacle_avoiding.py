@@ -6,11 +6,15 @@ from hcsr04 import calculate_right_distance, calculate_left_distance
 GPIO.setmode(GPIO.BCM)                   
 GPIO.setwarnings(False)
 
-def obstacle_avoidence(number_of_lives):
+def obstacle_avoidence():
     going_forward = False
     already_measured_left = False
 
     while True:
+        myFile = open("myFile1.txt", "r")
+        if myFile.read() == 'false':
+            break
+        myFile.close()
         if already_measured_left:
             distance = calculate_right_distance()
             obstacle = 'on right'

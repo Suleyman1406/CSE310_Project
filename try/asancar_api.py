@@ -21,6 +21,8 @@ def action(deviceName, action):
     if deviceName == 'manual':
         if action == 'forward':
                     forward()
+                    with open('auto.txt',x) as f:
+                        f.write(action)
         elif action == 'backward':
                     backward()
         elif action == 'right':
@@ -31,6 +33,8 @@ def action(deviceName, action):
                     stop()
     elif deviceName == 'auto':
         obstacle_avoidence(int(action))
+        with open('auto.txt',x) as f:
+            f.write(action)
     else:
         return 'is Confused'
     return response

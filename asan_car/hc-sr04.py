@@ -6,24 +6,17 @@ GPIO.setwarnings(False)
 
 R_TRIG = 8
 R_ECHO = 7
-
 L_TRIG = 26
 L_ECHO = 19
 
-print("HC-SR04 distance measurement in progress")
-
 GPIO.setup(R_TRIG,GPIO.OUT)
 GPIO.setup(R_ECHO,GPIO.IN)
-
 GPIO.setup(L_TRIG,GPIO.OUT)
 GPIO.setup(L_ECHO,GPIO.IN)
 
-while True:
-
-    # Right sensor begin
+def calculate_right_distance():
     GPIO.output(R_TRIG, False)
-    print("Olculuyor...")
-    time.sleep(1)
+    time.sleep(0.1)
 
     GPIO.output(R_TRIG, True)
     time.sleep(0.00001)
@@ -39,18 +32,11 @@ while True:
     
     right_distance = right_pulse_duration * 17150
     right_distance = round(right_distance, 2)
-    
-    if right_distance > 2 and right_distance < 400:
-        print("RIGHT -- Mesafe:",right_distance - 0.5,"cm")
-    else:
-        print("RIGHT -- Menzil asildi")
-
-    # Rigth sensor end
-    # Left sensor start 
-
+    return right_distance - 0.5
+                  
+def calculate_left_distance():
     GPIO.output(L_TRIG, False)
-    print("Olculuyor...")
-    time.sleep(1)
+    time.sleep(0.1)
 
     GPIO.output(L_TRIG, True)
     time.sleep(0.00001)
@@ -66,10 +52,27 @@ while True:
     
     left_distance = left_pulse_duration * 17150
     left_distance = round(left_distance, 2)
+    return left_distance - 0.5
 
-    if left_distance > 2 and left_distance < 400:
-        print("LEFT -- Mesafe:",left_distance - 0.5,"cm")
-    else:
-        print("LEFT -- Menzil asildi")
-    
-    # Left sensor end
+def main():
+    already_measured_left = False
+    while True:
+        
+        if already_measured_left:
+            distance = calculate_right_distance()
+            str = 'right'
+            already_measured_left = False
+            
+        else:
+            distance = calculate_left_distance()
+            str = 'left'
+            already_measured_left = True
+            
+        if distance > 2 and distance < 400:
+            print(str+" -- Mesafe:",distance - 0.5,"cm")
+        else:
+            print(str+" -- Menzil asildi")
+        time.sleep(0.5)
+
+if __name__ == "__main__":
+    main()

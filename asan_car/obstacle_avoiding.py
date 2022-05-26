@@ -10,7 +10,7 @@ def obstacle_avoidence(number_of_lives):
     going_forward = False
     already_measured_left = False
 
-    for x in range(number_of_lives):
+    while True:
         if already_measured_left:
             distance = calculate_right_distance()
             obstacle = 'on right'
@@ -20,6 +20,7 @@ def obstacle_avoidence(number_of_lives):
         already_measured_left = not already_measured_left
         print("distance "+obstacle+" is "+str(distance))
         if distance < 25:
+            number_of_lives = number_of_lives - 1
             stop()
             time.sleep(1)
             backward()

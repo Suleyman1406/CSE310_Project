@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 import time
 from l9119_engine import forward, backward, left, stop, right
 from hcsr04 import calculate_right_distance, calculate_left_distance
-from obstacle_avoiding import main
+from obstacle_avoiding import obstacle_avoidence
 
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)

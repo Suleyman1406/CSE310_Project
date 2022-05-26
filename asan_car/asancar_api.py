@@ -24,6 +24,8 @@ def action(deviceName, action):
                     right()
         elif action == 'left':
                     left()
+        elif action == 'stop':
+                    stop()
     elif deviceName == 'auto':
         main()
     else:
